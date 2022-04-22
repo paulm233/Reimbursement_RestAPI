@@ -4,6 +4,8 @@ import dev.marmo.entities.Employee;
 import dev.marmo.utilities.ConnectionUtil;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class EmployeeDAOPostgresImpl implements EmployeeDAO {
 
@@ -26,6 +28,34 @@ public class EmployeeDAOPostgresImpl implements EmployeeDAO {
             int generatedId = rs.getInt("employee_id");
             employee.setEmployeeID(generatedId);
             return employee;
+
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public List<Employee> getAllEmployees() {
+        Connection conn = ConnectionUtil.createConnection();
+        String sql = "select * from employee";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            List<Employee> employees = new ArrayList();
+            while(rs.next()){
+                Employee employee = new Employee();
+                employee.setEmployeeID(rs.getInt("employee_id"));
+                employee.setFirstName(rs.getString("f_name"));
+                employee.setLastName(rs.getString("l_name"));
+                employees.add(employee);
+            }
+
+            return employees;
+
 
 
 
@@ -61,13 +91,41 @@ public class EmployeeDAOPostgresImpl implements EmployeeDAO {
         }
     }
 
+
+
     @Override
     public Employee updateEmployee(Employee employee) {
-        return null;
+        try {
+            Connection conn =  ConnectionUtil.createConnection();
+            String sql = "update employee set f_name = ?, l_name = ? where employee_id=?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, employee.getFirstName());
+            ps.setString(2, employee.getLastName());
+            ps.setInt(3,employee.getEmployeeID());
+            ps.executeUpdate();
+
+            return employee;
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override
     public boolean deleteEmployeeByID(int id) {
-        return false;
+        try {
+            Connection conn = ConnectionUtil.createConnection();
+            String sql = "delete from employee where employee_id=?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+
+            ps.execute();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }
