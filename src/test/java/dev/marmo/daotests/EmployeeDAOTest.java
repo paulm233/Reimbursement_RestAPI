@@ -12,6 +12,7 @@ import java.util.List;
 
 public class EmployeeDAOTest {
 
+    //fix the grammar of this, camel casing
     static EmployeeDAO EmployeeDAO = new EmployeeDAOPostgresImpl();
     static Employee testAccount = null;
 

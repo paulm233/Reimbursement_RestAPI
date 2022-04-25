@@ -3,12 +3,21 @@ package dev.marmo.entities;
 public class Expense {
 
     private int expenseID;
-    private int amount;
     private String description;
+    private double amount;
+    private String status;
     private int employeeID;
 
     public Expense(){
 
+    }
+
+    public Expense(int expenseID, String description, double amount, String status, int employeeID) {
+        this.expenseID = expenseID;
+        this.description = description;
+        this.amount = amount;
+        this.status = status;
+        this.employeeID = employeeID;
     }
 
     public int getExpenseID() {
@@ -19,20 +28,30 @@ public class Expense {
         this.expenseID = expenseID;
     }
 
-    public int getAmount() {
-        return amount;
-    }
-
-    public void setAmount(int amount) {
-        this.amount = amount;
-    }
-
     public String getDescription() {
         return description;
     }
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public double getAmount() {
+
+        return amount;
+    }
+
+    public void setAmount(double amount) {
+
+        this.amount = amount;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public int getEmployeeID() {
@@ -47,8 +66,9 @@ public class Expense {
     public String toString() {
         return "Expense{" +
                 "expenseID=" + expenseID +
-                ", amount=" + amount +
                 ", description='" + description + '\'' +
+                ", amount=" + amount +
+                ", status='" + status + '\'' +
                 ", employeeID=" + employeeID +
                 '}';
     }
