@@ -1,3 +1,24 @@
 INFO Hello Mon May 02 22:39:24 EDT 2022
 DEBUG Wassup Mon May 02 22:39:24 EDT 2022
 INFO The employee with ID 22 was created  Mon May 02 23:20:40 EDT 2022
+ERROR ResultSet not positioned properly, perhaps you need to call next. Mon May 02 23:27:27 EDT 2022
+ERROR ERROR: update or delete on table "employee" violates foreign key constraint "expense_employee_id_fkey" on table "expense"
+  Detail: Key (employee_id)=(7) is still referenced from table "expense". Tue May 03 11:06:43 EDT 2022
+ERROR ERROR: update or delete on table "employee" violates foreign key constraint "expense_employee_id_fkey" on table "expense"
+  Detail: Key (employee_id)=(7) is still referenced from table "expense". Tue May 03 11:06:43 EDT 2022
+ERROR ERROR: update or delete on table "employee" violates foreign key constraint "expense_employee_id_fkey" on table "expense"
+  Detail: Key (employee_id)=(7) is still referenced from table "expense". Tue May 03 11:06:44 EDT 2022
+ERROR ResultSet not positioned properly, perhaps you need to call next. Tue May 03 11:07:55 EDT 2022
+ERROR ResultSet not positioned properly, perhaps you need to call next. Tue May 03 12:59:19 EDT 2022
+ERROR ResultSet not positioned properly, perhaps you need to call next. Tue May 03 12:59:33 EDT 2022
+ERROR ResultSet not positioned properly, perhaps you need to call next. Tue May 03 13:01:35 EDT 2022
+INFO The employee information has been updated Tue May 03 13:03:21 EDT 2022
+ERROR ResultSet not positioned properly, perhaps you need to call next. Tue May 03 13:09:26 EDT 2022
+ERROR ResultSet not positioned properly, perhaps you need to call next. Tue May 03 13:11:25 EDT 2022
+INFO The record 25 was updated Tue May 03 13:14:07 EDT 2022
+ERROR ResultSet not positioned properly, perhaps you need to call next. Tue May 03 13:14:22 EDT 2022
+ERROR ResultSet not positioned properly, perhaps you need to call next. Tue May 03 13:21:00 EDT 2022
+ERROR ResultSet not positioned properly, perhaps you need to call next. Tue May 03 13:21:45 EDT 2022
+ERROR ResultSet not positioned properly, perhaps you need to call next. Tue May 03 13:22:55 EDT 2022
+INFO Hello Tue May 03 13:25:12 EDT 2022
+DEBUG Wassup Tue May 03 13:25:12 EDT 2022

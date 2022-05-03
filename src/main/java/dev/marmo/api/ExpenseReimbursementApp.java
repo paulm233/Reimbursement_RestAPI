@@ -59,11 +59,11 @@ public class ExpenseReimbursementApp {
         //Get employee by employeeID
         app.get("/employees/{employeeID}", context -> {
                     int employeeID = Integer.parseInt(context.pathParam("employeeID"));
-                    try {
+                    Employee employee = employeeService.retrieveEmployeeById(employeeID);
+                    if(employee != null){
                         String employeeJSON = gson.toJson(employeeService.retrieveEmployeeById(employeeID));
-
                         context.result(employeeJSON);
-                    }catch (ResourceNotFound e) {
+                    }else {
                         context.status(404);
                         context.result("The employee with that id was not found.");
                     }
@@ -93,18 +93,26 @@ public class ExpenseReimbursementApp {
 
 
 
-        // may edit
+
         //Delete
 
         // employee by ID
         app.delete("/employees/{employeeID}", context -> {
             int employeeID = Integer.parseInt(context.pathParam("employeeID"));
-            boolean result = employeeService.removeEmployeeByID(employeeID);
-            if (result){
-                context.status(204);
-               // context.result("Employee record successfully deleted"); not displaying
-            }else{
-                context.status(404);
+            List<Expense> expenseList = expenseService.retrieveAllExpenses();
+            Employee retrievedEmployee = employeeService.retrieveEmployeeById(employeeID);
+            for(Expense expense : expenseList){
+                if (expense.getEmployeeID() == employeeID){
+                    context.result(("Cannot delete an employee that has expenses"));
+                    context.status(401);
+                    return;
+                } if (retrievedEmployee !=null){
+                    employeeService.removeEmployeeByID(employeeID);
+                    context.result("The employee has been deleted");
+                } else{
+                    context.status(404);
+                    context.result("Employee does not exist");
+                }
             }
         });
 
@@ -179,10 +187,11 @@ public class ExpenseReimbursementApp {
         //Get expense by expenseID
         app.get("/expenses/{expenseID}", context -> {
             int expenseID = Integer.parseInt(context.pathParam("expenseID"));
-            try {
+            Expense expense = expenseService.retrieveExpenseByID(expenseID);
+            if (expense!=null) {
                 String expenseJSON = gson.toJson(expenseService.retrieveExpenseByID(expenseID));
                 context.result(expenseJSON);
-            }catch(ResourceNotFound e) {
+            } else{
                 context.status(404);
                 context.result("The expense record with that record number was not found.");
             }
@@ -234,9 +243,12 @@ public class ExpenseReimbursementApp {
 
         //Approve expense
         app.patch("/expenses/{expenseID}/approve", context -> {
-            try {
+
                 int expenseID = Integer.parseInt(context.pathParam("expenseID"));
                 Expense expense = expenseService.retrieveExpenseByID(expenseID);
+
+                if(expense!=null){
+
                 if(Objects.equals(expense.getStatus(), "Pending")){
                     expenseService.approveExpense(expense);
                     context.result("The expense has been approved");
@@ -244,18 +256,21 @@ public class ExpenseReimbursementApp {
                 }else {
                     context.result("Cannot update a finalized expense.");
                 }
-            }catch(ResourceNotFound e){
+            }else{
                 context.status(404);
-                context.result(e.getMessage());
+                context.result("There is no expense with that ID");
             }
                 });
 
 
         //Deny
         app.patch("expenses/{expenseID}/deny", context -> {
-            try {
+
                 int expenseID = Integer.parseInt(context.pathParam("expenseID"));
                 Expense expense = expenseService.retrieveExpenseByID(expenseID);
+
+                if(expense!=null){
+
                 if(Objects.equals(expense.getStatus(),"Pending")){
                     expenseService.denyExpense(expense);
                     context.result("The expense has been denied");
@@ -263,8 +278,8 @@ public class ExpenseReimbursementApp {
                 } else{
                     context.result("Cannot update a finalized expense");
                 }
-            }catch(ResourceNotFound e){
-                context.result(e.getMessage());
+            }else{
+                context.result("There is no expense with that ID");
                 context.status(404);
             }
         });
