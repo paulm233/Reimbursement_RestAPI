@@ -13,7 +13,7 @@ import java.util.List;
 public class EmployeeDAOTest {
 
     //fix the grammar of this, camel casing
-    static EmployeeDAO EmployeeDAO = new EmployeeDAOPostgresImpl();
+    static EmployeeDAO employeeDAO = new EmployeeDAOPostgresImpl();
     static Employee testAccount = null;
 
 
@@ -25,7 +25,7 @@ public class EmployeeDAOTest {
 
 
         Employee billnye = new Employee(0, "Bill", "Nye");
-        Employee savedAccount = EmployeeDAO.createEmployee(billnye);
+        Employee savedAccount = employeeDAO.createEmployee(billnye);
         EmployeeDAOTest.testAccount = savedAccount;
         Assertions.assertNotEquals(0, savedAccount.getEmployeeID());
 
@@ -34,14 +34,14 @@ public class EmployeeDAOTest {
 
     @Test
     @Order(2)
-    void get_all_accounts(){
+    void get_all_employees(){
         Employee a = new Employee(0, "Mike","Laundry");
         Employee b = new Employee(0, "Randy","Savage");
         Employee c = new Employee(0, "Eric","Andre");
-        EmployeeDAO.createEmployee(a);
-        EmployeeDAO.createEmployee(b);
-        EmployeeDAO.createEmployee(c);
-        List<Employee> employees = EmployeeDAO.getAllEmployees();
+        employeeDAO.createEmployee(a);
+        employeeDAO.createEmployee(b);
+        employeeDAO.createEmployee(c);
+        List<Employee> employees = employeeDAO.getAllEmployees();
         int totalAccounts = employees.size();
         Assertions.assertTrue(totalAccounts>= 3);
         //System.out.println(accounts.get(12));
@@ -51,7 +51,7 @@ public class EmployeeDAOTest {
     @Test
     @Order(3)
     void get_employee_by_id(){
-        Employee retrievedEmployee = EmployeeDAO.getEmployeeByID(testAccount.getEmployeeID());
+        Employee retrievedEmployee = employeeDAO.getEmployeeByID(testAccount.getEmployeeID());
         System.out.println(retrievedEmployee);
         Assertions.assertEquals("Bill", retrievedEmployee.getFirstName());
     }
@@ -60,9 +60,9 @@ public class EmployeeDAOTest {
     @Order(4)
     void update_employee(){
         EmployeeDAOTest.testAccount.setFirstName("Jeff");
-        EmployeeDAO.updateEmployee(testAccount); //the new name should be saved to the
+        employeeDAO.updateEmployee(testAccount); //the new name should be saved to the
 
-        Employee retrievedUser = EmployeeDAO.getEmployeeByID(testAccount.getEmployeeID());
+        Employee retrievedUser = employeeDAO.getEmployeeByID(testAccount.getEmployeeID());
         Assertions.assertEquals("Jeff", retrievedUser.getFirstName());
 
     }
@@ -70,7 +70,7 @@ public class EmployeeDAOTest {
     @Test
     @Order(5)
     void delete_employee_by_id(){
-        boolean result = EmployeeDAO.deleteEmployeeByID(testAccount.getEmployeeID()); //true if successful
+        boolean result = employeeDAO.deleteEmployeeByID(testAccount.getEmployeeID()); //true if successful
         Assertions.assertTrue(result);
 
     }

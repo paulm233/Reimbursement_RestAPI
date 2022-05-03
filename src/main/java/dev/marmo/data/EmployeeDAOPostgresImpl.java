@@ -2,6 +2,8 @@ package dev.marmo.data;
 
 import dev.marmo.entities.Employee;
 import dev.marmo.utilities.ConnectionUtil;
+import dev.marmo.utilities.LogLevel;
+import dev.marmo.utilities.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -33,6 +35,7 @@ public class EmployeeDAOPostgresImpl implements EmployeeDAO {
 
         } catch (SQLException e) {
             e.printStackTrace();
+            Logger.log(e.getMessage(), LogLevel.ERROR);
             return null;
         }
     }
@@ -61,6 +64,7 @@ public class EmployeeDAOPostgresImpl implements EmployeeDAO {
 
         } catch (SQLException e) {
             e.printStackTrace();
+            Logger.log(e.getMessage(), LogLevel.ERROR);
             return null;
         }
     }
@@ -87,6 +91,7 @@ public class EmployeeDAOPostgresImpl implements EmployeeDAO {
 
         } catch (SQLException e) {
             e.printStackTrace();
+            Logger.log(e.getMessage(), LogLevel.ERROR);
             return null;
         }
     }
@@ -109,6 +114,7 @@ public class EmployeeDAOPostgresImpl implements EmployeeDAO {
 
         } catch (SQLException e) {
             e.printStackTrace();
+            Logger.log(e.getMessage(), LogLevel.ERROR);
             return null;
         }
     }
@@ -125,6 +131,7 @@ public class EmployeeDAOPostgresImpl implements EmployeeDAO {
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
+            Logger.log(e.getMessage(), LogLevel.ERROR);
             return false;
         }
     }

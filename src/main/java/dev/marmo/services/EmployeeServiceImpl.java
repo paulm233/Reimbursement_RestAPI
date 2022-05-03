@@ -2,6 +2,8 @@ package dev.marmo.services;
 
 import dev.marmo.data.EmployeeDAO;
 import dev.marmo.entities.Employee;
+import dev.marmo.utilities.LogLevel;
+import dev.marmo.utilities.Logger;
 
 import java.util.List;
 
@@ -18,7 +20,9 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public Employee registerEmployee(Employee employee) {
 
-        return this.employeeDAO.createEmployee(employee);
+        Employee employee1 = this.employeeDAO.createEmployee(employee);
+        Logger.log("The employee with ID " + employee1.getEmployeeID()+ " was created ", LogLevel.INFO);
+        return employee1;
 }
 
     @Override
@@ -34,6 +38,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee editEmployee(Employee employee) {
+        Logger.log("The employee information has been updated", LogLevel.INFO);
         return this.employeeDAO.updateEmployee(employee);
     }
 

@@ -11,11 +11,13 @@ public interface ExpenseDAO {
 
 
     //Read
+    List<Expense> getAllExpenses();
+
     Expense getExpenseByID (int expenseID);
 
-    Expense getExpenseByEmployeeID(int employeeID);
+    List <Expense> getExpensesByEmployeeID(int employeeID);
 
-    List<Expense> getAllExpenses();
+
 
 
     //Update
@@ -23,7 +25,7 @@ public interface ExpenseDAO {
 
 
     //Delete
-    Expense deleteExpenseByID(int expenseID);
+    boolean deleteExpenseByID(int expenseID);
 
 
 }

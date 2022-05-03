@@ -10,6 +10,8 @@ public interface EmployeeService {
      //create
      Employee registerEmployee(Employee employee);
 
+
+
      //read
      List<Employee> retrieveAllEmployees();
 
