@@ -22,3 +22,4 @@ ERROR ResultSet not positioned properly, perhaps you need to call next. Tue May 
 ERROR ResultSet not positioned properly, perhaps you need to call next. Tue May 03 13:22:55 EDT 2022
 INFO Hello Tue May 03 13:25:12 EDT 2022
 DEBUG Wassup Tue May 03 13:25:12 EDT 2022
+INFO The employee with ID 27 was created  Tue May 03 14:05:19 EDT 2022

@@ -10,8 +10,10 @@ import dev.marmo.services.EmployeeService;
 import dev.marmo.services.EmployeeServiceImpl;
 import dev.marmo.services.ExpenseService;
 import dev.marmo.services.ExpenseServiceImpl;
+import dev.marmo.utilities.ConnectionUtil;
 import io.javalin.Javalin;
 
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -26,6 +28,18 @@ public class ExpenseReimbursementApp {
 
 
         Javalin app = Javalin.create();
+
+
+        app.get("/", context -> {
+            Connection conn = ConnectionUtil.createConnection();
+            if(conn != null){
+                context.status(200);
+                context.result("Application is working");
+            }else{
+                context.status(400);
+                context.result("Application not connecting");
+            }
+        });
 
 
         //employee routes
@@ -308,7 +322,7 @@ public class ExpenseReimbursementApp {
 
 
 
-            app.start(6000);
+            app.start(5000);
     }
 }
 
